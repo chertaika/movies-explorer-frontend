@@ -1,0 +1,25 @@
+.section-title {
+  margin: 0;
+  width: 100%;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 400;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #dadada;
+  letter-spacing: -1px;
+}
+
+@media screen and (max-width: 670px) {
+  .section-title {
+    font-size: 18px;
+    line-height: 1;
+    padding-bottom: 29px;
+    border-bottom: 1px solid #dadada;
+    letter-spacing: -0.7px;
+  }
+
+  .section-title_type_techs {
+    border-color: #000;
+  }
+}

@@ -4,12 +4,15 @@ import headerLogo from '../../assets/images/logo.svg';
 import Navigation from '../Navigation/Navigation';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
 
-const Header = ({ isLoggedIn }) => (
-  <header className="header">
-    <Link to="/" className="header__link">
-      <img className="header__logo" src={headerLogo} alt="логотип" />
-    </Link>
-    {isLoggedIn ? <Navigation /> : <AuthNavigation />}
+const Header = ({ isLoggedIn = true, isLanding = false }) => (
+  <header className={`header ${isLanding && 'header_type_landing'}`}>
+    <div className="header__container">
+      <Link to="/" className="header__link">
+        <img className="header__logo" src={headerLogo} alt="логотип" />
+      </Link>
+      {isLoggedIn ? <Navigation /> : <AuthNavigation />}
+    </div>
+
   </header>
 );
 

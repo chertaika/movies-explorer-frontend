@@ -11,54 +11,66 @@ const Navigation = () => {
 
   return (
     <nav className="navigation">
-      <button type="button" className="navigation__burger" onClick={handleOpenMenu}>
+      <button
+        type="button"
+        className={`navigation__burger
+        ${isMenuOpened && 'navigation__burger_active'}`}
+        onClick={handleOpenMenu}
+      >
         <span className={`navigation__burger-line
         ${isMenuOpened && 'navigation__burger-line_active'}`}
         />
       </button>
-      <div className={`navigation__links-container
+      <nav className={`navigation__links-container
       ${isMenuOpened && 'navigation__links-container_opened'}`}
       >
-        <div className={`navigation__links
+        <ul className={`navigation__links
         ${isMenuOpened && 'navigation__links_opened'}`}
         >
-          <NavLink
-            to="/"
-            onClick={handleOpenMenu}
-            className={({ isActive }) => `navigation__link navigation__link_type_main
+          <li className="navigation__links-item navigation__links-item_type_main">
+            <NavLink
+              to="/"
+              onClick={handleOpenMenu}
+              className={({ isActive }) => `navigation__link
             ${isActive ? 'navigation__link_active' : ''
-            }`}
-          >
-            Главная
-          </NavLink>
-          <NavLink
-            to="/movies"
-            onClick={handleOpenMenu}
-            className={({ isActive }) => `navigation__link
+              }`}
+            >
+              Главная
+            </NavLink>
+          </li>
+          <li className="navigation__links-item">
+            <NavLink
+              to="/movies"
+              onClick={handleOpenMenu}
+              className={({ isActive }) => `navigation__link
             ${isActive ? 'navigation__link_active' : ''
-            }`}
-          >
-            Фильмы
-          </NavLink>
-          <NavLink
-            to="/saved-movies"
-            onClick={handleOpenMenu}
-            className={({ isActive }) => `navigation__link
+              }`}
+            >
+              Фильмы
+            </NavLink>
+          </li>
+          <li className="navigation__links-item">
+            <NavLink
+              to="/saved-movies"
+              onClick={handleOpenMenu}
+              className={({ isActive }) => `navigation__link
             ${isActive ? 'navigation__link_active' : ''}`}
-          >
-            Сохранённые
-            фильмы
-          </NavLink>
-          <NavLink
-            to="/profile"
-            onClick={handleOpenMenu}
-            className="navigation__link navigation__link_type_profile"
-          >
-            Аккаунт
-            <span className="navigation__profile-icon" />
-          </NavLink>
-        </div>
-      </div>
+            >
+              Сохранённые фильмы
+            </NavLink>
+          </li>
+          <li className="navigation__links-item">
+            <NavLink
+              to="/profile"
+              onClick={handleOpenMenu}
+              className="navigation__link navigation__link_type_profile"
+            >
+              Аккаунт
+              <span className="navigation__profile-icon" />
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
     </nav>
   );
 };
