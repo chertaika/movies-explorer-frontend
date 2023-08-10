@@ -27,11 +27,17 @@ const Navigation = () => {
         <ul className={`navigation__links
         ${isMenuOpened && 'navigation__links_opened'}`}
         >
-          <li className="navigation__links-item navigation__links-item_type_main">
+          <li
+            className="
+            navigation__links-item
+            navigation__links-item_type_main"
+          >
             <NavLink
               to="/"
               onClick={handleOpenMenu}
-              className={({ isActive }) => `navigation__link
+              className={({ isActive }) => `
+              navigation__link
+              link-hover
             ${isActive ? 'navigation__link_active' : ''
               }`}
             >
@@ -42,7 +48,9 @@ const Navigation = () => {
             <NavLink
               to="/movies"
               onClick={handleOpenMenu}
-              className={({ isActive }) => `navigation__link
+              className={({ isActive }) => `
+              navigation__link
+              link-hover
             ${isActive ? 'navigation__link_active' : ''
               }`}
             >
@@ -53,7 +61,9 @@ const Navigation = () => {
             <NavLink
               to="/saved-movies"
               onClick={handleOpenMenu}
-              className={({ isActive }) => `navigation__link
+              className={({ isActive }) => `
+              navigation__link
+              link-hover
             ${isActive ? 'navigation__link_active' : ''}`}
             >
               Сохранённые фильмы
@@ -63,7 +73,10 @@ const Navigation = () => {
             <NavLink
               to="/profile"
               onClick={handleOpenMenu}
-              className="navigation__link navigation__link_type_profile"
+              className="
+              navigation__link
+              navigation__link_type_profile
+              link-hover"
             >
               Аккаунт
               <span className="navigation__profile-icon" />

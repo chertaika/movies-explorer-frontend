@@ -25,13 +25,6 @@
   aspect-ratio: 1/1;
   object-fit: contain;
   object-position: center;
-  transition: opacity .3s;
-}
-
-@media screen and (hover: hover) {
-  .header__logo:hover {
-    opacity: .8;
-  }
 }
 
 @media screen and (max-width: 769px) {

@@ -65,13 +65,6 @@
   font-size: 14px;
   line-height: 1;
   font-weight: 500;
-  transition: opacity .3s;
-}
-
-@media screen and (hover: hover) {
-  .about-me__link:hover {
-    opacity: .7;
-  }
 }
 
 .about-me__photo {

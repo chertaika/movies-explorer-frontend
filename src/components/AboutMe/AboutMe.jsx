@@ -28,7 +28,7 @@ const AboutMe = () => (
         <ul className="about-me__links">
           <li>
             <Link
-              className="about-me__link"
+              className="about-me__link link-hover"
               to="https://github.com/chertaika"
               target="_blank"
             >
@@ -37,7 +37,7 @@ const AboutMe = () => (
           </li>
           <li>
             <Link
-              className="about-me__link"
+              className="about-me__link link-hover"
               to="https://www.codewars.com/users/chertaika"
               target="_blank"
             >

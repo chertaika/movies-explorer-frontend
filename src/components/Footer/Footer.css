@@ -53,14 +53,7 @@
   font-size: 13px;
   line-height: 1;
   font-weight: 400;
-  transition: opacity .3s;
   -webkit-tap-highlight-color: transparent;
-}
-
-@media screen and (hover: hover) {
-  .footer__navigation-link:hover {
-    opacity: .7;
-  }
 }
 
 @media screen and (max-width: 769px) {

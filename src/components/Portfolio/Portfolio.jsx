@@ -7,7 +7,7 @@ const Portfolio = () => (
     <ul className="portfolio__links">
       <li className="portfolio__links-item">
         <Link
-          className="portfolio__link"
+          className="portfolio__link link-hover"
           to="https://ekipirovka70.ru/"
           target="_blank"
         >
@@ -17,7 +17,7 @@ const Portfolio = () => (
       </li>
       <li className="portfolio__links-item">
         <Link
-          className="portfolio__link"
+          className="portfolio__link link-hover"
           to="https://github.com/chertaika/react-mesto-api-full-gha"
           target="_blank"
         >
@@ -27,7 +27,7 @@ const Portfolio = () => (
       </li>
       <li className="portfolio__links-item">
         <Link
-          className="portfolio__link"
+          className="portfolio__link link-hover"
           to="https://chertaika.github.io/react-burgers-landing/"
           target="_blank"
         >

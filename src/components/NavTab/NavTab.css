@@ -23,14 +23,7 @@
   line-height: 16px;
   font-weight: 500;
   text-underline-offset: 3px;
-  transition: opacity .3s;
   -webkit-tap-highlight-color: transparent;
-}
-
-@media screen and (hover: hover) {
-  .nav-tab__link:hover {
-opacity: .7;
-  }
 }
 
 @media screen and (max-width: 670px){

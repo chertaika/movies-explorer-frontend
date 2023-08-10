@@ -18,14 +18,7 @@
   font-weight: 500;
   text-decoration: none;
   user-select: none;
-  transition: opacity .3s;
   -webkit-tap-highlight-color: transparent;
-}
-
-@media screen and (hover: hover) {
-  .auth-navigation__link:hover {
-    opacity: .7;
-  }
 }
 
 .auth-navigation__link_type_register {
@@ -37,12 +30,6 @@
   padding: 8px 20px;
   background-color: #3ddc84;
   border-radius: 3px;
-}
-
-@media screen and (hover: hover) {
-  .auth-navigation__link_type_authorization:hover {
-    opacity: .8;
-  }
 }
 
 @media screen and (max-width: 452px) {

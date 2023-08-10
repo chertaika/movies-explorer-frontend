@@ -95,16 +95,9 @@
   font-size: 13px;
   line-height: 18px;
   font-weight: 400;
-  transition: opacity .3s;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   position: relative;
-}
-
-@media screen and (hover: hover) {
-  .navigation__link:hover {
-    opacity: .7;
-  }
 }
 
 .navigation__link_active {

@@ -43,13 +43,6 @@
   font-weight: 400;
   text-decoration: none;
   letter-spacing: -1.2px;
-  transition: opacity .3s;
-}
-
-@media screen and (hover: hover) {
-  .portfolio__link:hover {
-    opacity: .7;
-  }
 }
 
 .portfolio__link-icon {

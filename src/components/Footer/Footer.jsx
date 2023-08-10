@@ -10,7 +10,7 @@ const Footer = () => (
         <ul className="footer__navigation-links">
           <li>
             <Link
-              className="footer__navigation-link"
+              className="footer__navigation-link link-hover"
               to="https://practicum.yandex.ru/"
               target="_blank"
             >
@@ -19,7 +19,7 @@ const Footer = () => (
           </li>
           <li>
             <Link
-              className="footer__navigation-link"
+              className="footer__navigation-link link-hover"
               to="https://github.com/chertaika"
               target="_blank"
             >
