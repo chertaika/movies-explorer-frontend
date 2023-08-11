@@ -17,8 +17,6 @@
   line-height: 16px;
   font-weight: 500;
   text-decoration: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
 }
 
 .auth-navigation__link_type_register {

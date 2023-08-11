@@ -8,7 +8,7 @@ const NavTab = () => (
         <Link
           className="nav-tab__link link-hover"
           smooth
-          to="home-page#about-project"
+          to="#about-project"
         >
           О проекте
         </Link>
@@ -17,7 +17,7 @@ const NavTab = () => (
         <Link
           className="nav-tab__link link-hover"
           smooth
-          to="home-page#techs"
+          to="#techs"
         >
           Технологии
         </Link>
@@ -26,7 +26,7 @@ const NavTab = () => (
         <Link
           className="nav-tab__link link-hover"
           smooth
-          to="home-page#about-me"
+          to="#about-me"
         >
           Студент
         </Link>

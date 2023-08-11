@@ -32,9 +32,10 @@
 }
 
 .portfolio__link {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  gap: 10px;
   align-items: center;
-  justify-content: space-between;
   color: #fff;
   font-size: 30px;
   line-height: 50px;
@@ -74,6 +75,7 @@
   .portfolio__link {
     font-size: 28px;
     letter-spacing: -1.1px;
+    grid-template-columns: 1fr 22px;
   }
 
   .portfolio__link-icon {
@@ -104,6 +106,7 @@
     padding-bottom: 18px;
     letter-spacing: -0.7px;
     -webkit-tap-highlight-color: transparent;
+    grid-template-columns: 1fr 15px;
   }
 
   .portfolio__link-icon {

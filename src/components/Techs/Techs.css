@@ -91,6 +91,10 @@
 }
 
 @media screen and (max-width: 670px){
+  .techs {
+    background-color: transparent;
+  }
+
   .techs__container {
     padding: 73px 18px 70px;
   }

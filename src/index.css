@@ -25,6 +25,9 @@
 
 .link-hover {
   transition: opacity .3s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  cursor: pointer;
 }
 
 @media screen and (hover: hover) {
@@ -35,10 +38,21 @@
 
 .button-hover {
   transition: opacity .3s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  cursor: pointer;
+}
+
+.button-hover:disabled {
+  cursor: not-allowed;
 }
 
 @media screen and (hover: hover) {
   .button-hover:hover {
     opacity: .8;
+  }
+
+  .button-hover:disabled:hover {
+    opacity: 1;
   }
 }

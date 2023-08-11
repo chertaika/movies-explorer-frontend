@@ -15,7 +15,7 @@
   background-color: transparent;
   -webkit-tap-highlight-color: transparent;
   z-index: 10;
-  transition: transform .4s;
+  transition: transform .4s, opacity .3s;
 }
 
 .navigation__burger-line {

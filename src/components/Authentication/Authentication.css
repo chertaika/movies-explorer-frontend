@@ -1,0 +1,129 @@
+.authentication {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 70px 30px;
+  box-sizing: border-box;
+  transition: padding .5s;
+}
+
+.authentication__container {
+  max-width: 396px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.authentication__main-link {
+  display: block;
+}
+
+.authentication__logo {
+  display: block;
+  width: 38px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  object-position: center;
+}
+
+.authentication__title {
+  margin: 40px 0 0;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.authentication__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  min-height: 395px;
+}
+
+.authentication__request-error {
+  color: #EE3465;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  margin: 5px 0 auto;
+  min-height: 12px;
+}
+
+.authentication__submit-btn {
+  background-color: #4285F4;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: #fff;
+  padding: 13px 14px 15px;
+  border: none;
+  border-radius: 3px;
+  transition: opacity .3s, background-color .3s, color .3s;
+  cursor: pointer;
+}
+
+.authentication__submit-btn:disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
+}
+
+.authentication__paragraph {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: #8B8B8B;
+  display: flex;
+  gap: 7px;
+  align-self: center;
+  margin: 16px 0 0;
+}
+
+.authentication__link {
+  color: #4285F4;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 769px) {
+  .authentication {
+    padding: 232px 30px 232px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .authentication {
+    padding: 56px 30px 30px;
+  }
+
+  .authentication__container {
+    align-items: center;
+  }
+
+  .authentication__title {
+    margin-top: 50px;
+  }
+
+  .authentication__form {
+    margin-top: 65px;
+    height: 100%;
+  }
+
+  .authentication__request-error {
+    margin-bottom: auto;
+  }
+
+  .authentication__submit-btn {
+    font-size: 12px;
+    line-height: 15px;
+    padding: 15px;
+  }
+
+  .authentication__paragraph {
+    font-size: 12px;
+    line-height: 15px;
+    gap: 7px;
+    margin-top: 14px;
+  }
+}
+

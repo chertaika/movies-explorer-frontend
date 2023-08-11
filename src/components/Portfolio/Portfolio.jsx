@@ -21,7 +21,7 @@ const Portfolio = () => (
           to="https://github.com/chertaika/react-mesto-api-full-gha"
           target="_blank"
         >
-          Mesto - приложение-соцсеть с фотографиями
+          Mesto &mdash; приложение-соцсеть с фотографиями
           <span className="portfolio__link-icon" />
         </Link>
       </li>
