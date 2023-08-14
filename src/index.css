@@ -23,6 +23,13 @@
   background-color: #5d5d5d;
 }
 
+.root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .link-hover {
   transition: opacity .3s;
   -webkit-tap-highlight-color: transparent;
