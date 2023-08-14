@@ -49,7 +49,7 @@ const AboutMe = () => (
       <img
         className="about-me__photo"
         src={studentPhoto}
-        alt="Екатерина Юркова, веб-разработчик, фронтенд-разработчик"
+        alt="Екатерина"
       />
     </div>
     <Portfolio />

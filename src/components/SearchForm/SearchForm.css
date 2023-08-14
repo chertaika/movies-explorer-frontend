@@ -34,17 +34,20 @@
 .search-form__input {
   width: 100%;
   background-color: transparent;
-  border: none;
+  border: 1px solid transparent;
   font-size: 13px;
   line-height: 18px;
   font-weight: 400;
-  padding: 8px 16px;
+  padding: 7px 15px;
   color: #fff;
+  box-sizing: border-box;
+  border-radius: 28px;
+  transition: border .3s;
 }
 
 .search-form__input:focus {
-  border: none;
   outline: none;
+  border: 1px solid rgba(61, 220, 132, .4);
 }
 
 .search-form__input::placeholder {
