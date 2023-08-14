@@ -16,7 +16,7 @@ const Login = ({ requestErrorText }) => {
       isValid={isValid}
       requestErrorText={requestErrorText}
       paragraphText="Ещё не зарегистрированы?"
-      paragraphLink="/sign-up"
+      paragraphLink="/signup"
       paragraphButton="Регистрация"
     >
       <AuthInput
@@ -26,7 +26,6 @@ const Login = ({ requestErrorText }) => {
         name="email"
         inputValue={inputValues.email}
         errorMessage={errorMessages.email}
-        autoComplete
         placeInput="auth"
         handleChange={handleChange}
         required
@@ -38,7 +37,6 @@ const Login = ({ requestErrorText }) => {
         name="password"
         inputValue={inputValues.password}
         errorMessage={errorMessages.password}
-        autoComplete
         placeInput="auth"
         handleChange={handleChange}
         required

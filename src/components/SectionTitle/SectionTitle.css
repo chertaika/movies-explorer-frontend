@@ -3,9 +3,9 @@
   width: 100%;
   color: #fff;
   font-size: 22px;
-  line-height: 1;
+  line-height: 27px;
   font-weight: 400;
-  padding-bottom: 25px;
+  padding-bottom: 23px;
   border-bottom: 1px solid #dadada;
   letter-spacing: -1px;
 }
@@ -13,8 +13,8 @@
 @media screen and (max-width: 670px) {
   .section-title {
     font-size: 18px;
-    line-height: 1;
-    padding-bottom: 29px;
+    line-height: 22px;
+    padding-bottom: 28px;
     border-bottom: 1px solid #dadada;
     letter-spacing: -0.7px;
   }

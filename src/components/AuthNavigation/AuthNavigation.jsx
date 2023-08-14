@@ -10,7 +10,7 @@ const AuthNavigation = () => (
           auth-navigation__link
           auth-navigation__link_type_register
           link-hover"
-          to="/sign-up"
+          to="/signup"
         >
           Регистрация
         </Link>
@@ -21,7 +21,7 @@ const AuthNavigation = () => (
           auth-navigation__link
           auth-navigation__link_type_authorization
           button-hover"
-          to="/sign-in"
+          to="/signin"
         >
           Войти
         </Link>

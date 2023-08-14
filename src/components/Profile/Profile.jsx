@@ -70,17 +70,35 @@ const Profile = () => {
                 {errorMessages.email}
               </span>
             </label>
-            <p className="profile__request-error">При обновлении профиля произошла ошибка.</p>
-            <button
-              className={`profile__submit-btn ${isEditProfile && 'profile__submit-btn_type_edit'} button-hover`}
-              type="submit"
-              disabled={!isValid && isEditProfile}
-              onClick={handleClickEditProfile}
-            >
-              {isEditProfile ? 'Сохранить' : 'Редактировать'}
-            </button>
+            {isEditProfile
+            && (
+              <>
+                <p className="profile__request-error">
+                  При обновлении профиля произошла ошибка.
+                </p>
+                <button
+                  className="profile__submit-btn button-hover"
+                  type="submit"
+                  disabled={!isValid}
+                >
+                  {isEditProfile ? 'Сохранить' : 'Редактировать'}
+                </button>
+              </>
+            )}
+            {!isEditProfile
+            && (
+            <>
+              <button
+                className="profile__edit-btn button-hover"
+                type="button"
+                onClick={handleClickEditProfile}
+              >
+                {isEditProfile ? 'Сохранить' : 'Редактировать'}
+              </button>
+              <button className="profile__logout button-hover" type="button">Выйти из аккаунта</button>
+            </>
+            )}
           </form>
-          {!isEditProfile && <button className="profile__logout button-hover" type="button">Выйти из аккаунта</button>}
         </div>
       </main>
     </>

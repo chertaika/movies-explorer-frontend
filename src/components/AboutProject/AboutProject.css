@@ -1,7 +1,7 @@
 .about-project {
   max-width: 1280px;
   width: 100%;
-  padding: 113px 70px 111px;
+  padding: 110px 70px;
   margin: 0 auto;
   box-sizing: border-box;
   transition: padding .5s;
@@ -44,9 +44,9 @@
 .about-project__time-interval {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   font-size: 14px;
-  line-height: 1;
+  line-height: 18px;
   font-weight: 400;
 }
 
@@ -55,7 +55,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 11px 0;
+  padding: 9px 0;
   background-color: #3DDC84;
   color: #000;
 }
@@ -66,13 +66,14 @@
 }
 
 .about-project__time-caption {
-text-align: center;
+  text-align: center;
+  line-height: 17px;
   color: #8B8B8B;
 }
 
 @media screen and (max-width: 769px){
   .about-project {
-    padding: 93px 50px 91px;
+    padding: 90px 50px;
   }
 
   .about-project__info {
@@ -96,7 +97,7 @@ text-align: center;
 
 @media screen and (max-width: 670px){
   .about-project {
-    padding: 73px 18px 70px;
+    padding: 70px 18px;
   }
 
   .about-project__info {
@@ -134,5 +135,9 @@ text-align: center;
 
   .about-project__time-line {
     padding: 12px 0 10px;
+  }
+
+  .about-project__time-caption {
+    line-height: 13px;
   }
 }

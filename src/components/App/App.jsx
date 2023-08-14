@@ -4,6 +4,10 @@ import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import { testMovies } from '../../utils/constants';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 const App = () => (
   <Routes>
@@ -16,12 +20,24 @@ const App = () => (
       element={<Profile />}
     />
     <Route
-      path="/sign-up"
-      element={<Register requestErrorText="Пользователь с таким email уже существует." />}
+      path="/movies"
+      element={<Movies movies={testMovies} />}
     />
     <Route
-      path="/sign-in"
-      element={<Login requestErrorText="При авторизации произошла ошибка. Токен не передан или передан не в том формате." />}
+      path="/saved-movies"
+      element={<SavedMovies movies={testMovies} />}
+    />
+    <Route
+      path="/signup"
+      element={<Register requestErrorText="Что-то пошло не так..." />}
+    />
+    <Route
+      path="/signin"
+      element={<Login />}
+    />
+    <Route
+      path="*"
+      element={<PageNotFound />}
     />
   </Routes>
 

@@ -16,7 +16,7 @@ const Register = ({ requestErrorText }) => {
       isValid={isValid}
       requestErrorText={requestErrorText}
       paragraphText="Уже зарегистрированы?"
-      paragraphLink="/sign-in"
+      paragraphLink="/signin"
       paragraphButton="Войти"
     >
       <AuthInput
