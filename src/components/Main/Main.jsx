@@ -9,7 +9,7 @@ import Footer from '../Footer/Footer';
 
 const Main = () => (
   <>
-    <Header isLoggedIn="true" isLanding="true" />
+    <Header isLanding="true" />
     <main className="page">
       <Promo />
       <NavTab />
