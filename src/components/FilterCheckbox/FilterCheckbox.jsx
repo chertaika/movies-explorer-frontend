@@ -20,7 +20,7 @@ const FilterCheckbox = () => {
         onChange={handleChangeToggleSwitch}
       />
       <span
-        className={`filter-checkbox__slider ${isShortFilm && 'filter-checkbox__slider_active'}`}
+        className={`filter-checkbox__slider ${isShortFilm ? 'filter-checkbox__slider_active' : ''}`}
       />
       Короткометражки
     </label>

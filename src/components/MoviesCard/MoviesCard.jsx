@@ -28,13 +28,13 @@ const MoviesCard = ({
     <article className="movies-card">
       <a href={trailerLink} className="movies-card__link" target="_blank" rel="noreferrer">
         <img
-          className={`movies-card__image ${isImageError && 'movies-card__image_type_error'}`}
+          className={`movies-card__image ${isImageError ? 'movies-card__image_type_error' : ''}`}
           src={!isImageError ? image : imageError}
           alt={nameRU}
           onError={handleImageError}
         />
       </a>
-      <div className={`movies-card__desc ${isSavedMovies && 'movies-card__desc_type_saved-movies'}`}>
+      <div className={`movies-card__desc ${isSavedMovies ? 'movies-card__desc_type_saved-movies' : ''}`}>
         <h2 className="movies-card__title">{nameRU}</h2>
         {isSavedMovies
           ? (

@@ -16,7 +16,7 @@ const AuthInput = ({
     <input
       type={type}
       placeholder={placeholder}
-      className={`auth-input__input ${type === 'password' && 'auth-input__input_type_password'} ${errorMessage && 'auth-input__input_type_error'}`}
+      className={`auth-input__input ${type === 'password' ? 'auth-input__input_type_password' : ''} ${errorMessage ? 'auth-input__input_type_error' : ''}`}
       name={name}
       minLength={minLength}
       maxLength={maxLength}

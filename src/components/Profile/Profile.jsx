@@ -33,7 +33,7 @@ const Profile = () => {
             <label className="profile__field">
               <span className="profile__label">Имя</span>
               <input
-                className={`profile__input ${isEditProfile && 'profile__input_active'} ${errorMessages.name && 'profile__input_active-error'}`}
+                className={`profile__input ${isEditProfile ? 'profile__input_active' : ''} ${errorMessages.name ? 'profile__input_active-error' : ''}`}
                 type="text"
                 placeholder="Имя"
                 name="name"
@@ -54,7 +54,7 @@ const Profile = () => {
             <label className="profile__field">
               <span className="profile__label">E-mail</span>
               <input
-                className={`profile__input ${isEditProfile && 'profile__input_active'} ${errorMessages.email && 'profile__input_active-error'}`}
+                className={`profile__input ${isEditProfile ? 'profile__input_active' : ''} ${errorMessages.email ? 'profile__input_active-error' : ''}`}
                 type="email"
                 placeholder="E-mail"
                 name="email"
