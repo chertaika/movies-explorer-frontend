@@ -5,11 +5,11 @@ const testMovies = [
     duration: '107',
     year: '2019',
     description: 'Школа дизайна Bang Bang Education собрала компанию из 33'
-    + 'современных русских дизайнеров. Все они говорят и думают по-русски и'
-    + 'неизбежно вдохновляются тем, что вошло в наш быт, книги, практики, ритуалы,'
-    + 'праздники, экономику, историческую память и моду. Этот альманах — поиск'
-    + 'особенностей и границ национального восприятия красоты, желание увидеть,'
-    + 'какие этические и эстетические ценности мы несем миру.',
+      + 'современных русских дизайнеров. Все они говорят и думают по-русски и'
+      + 'неизбежно вдохновляются тем, что вошло в наш быт, книги, практики, ритуалы,'
+      + 'праздники, экономику, историческую память и моду. Этот альманах — поиск'
+      + 'особенностей и границ национального восприятия красоты, желание увидеть,'
+      + 'какие этические и эстетические ценности мы несем миру.',
     image: 'https://static.okko.tv/images/v2/10235974?presetId=4000&amp;width=NaN&amp;scale=1&amp;quality=80',
     trailerLink: 'https://www.youtube.com/watch?v=5ovzC93EneA',
     thumbnail: 'https://static.okko.tv/images/v2/10235974?presetId=4000&amp;width=NaN&amp;scale=1&amp;quality=80',
@@ -257,6 +257,39 @@ const MOVIES_PER_PAGE_1280 = 12;
 const MOVIES_PER_PAGE_768 = 8;
 const MOVIES_PER_PAGE_320 = 5;
 
+const mainApiSettings = {
+  baseUrl: 'https://api.chertaika.nomoreparties.co',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  endpoints: {
+    userEndpoint: '/users/me',
+    moviesEndpoint: '/cards',
+    regEndpoint: '/signup',
+    authEndpoint: '/signin',
+    logoutEndpoint: '/logout',
+  },
+};
+
+const moviesApiSettings = {
+  baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
+const METHOD_PATCH = 'PATCH';
+const METHOD_POST = 'POST';
+const METHOD_DELETE = 'DELETE';
+
 export {
-  testMovies, MOVIES_PER_PAGE_1280, MOVIES_PER_PAGE_768, MOVIES_PER_PAGE_320,
+  testMovies,
+  MOVIES_PER_PAGE_1280,
+  MOVIES_PER_PAGE_768,
+  MOVIES_PER_PAGE_320,
+  mainApiSettings,
+  moviesApiSettings,
+  METHOD_PATCH,
+  METHOD_POST,
+  METHOD_DELETE,
 };
