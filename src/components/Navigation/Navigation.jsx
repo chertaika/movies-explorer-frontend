@@ -10,22 +10,22 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="navigation">
+    <div className="navigation">
       <button
         type="button"
         className={`navigation__burger button-hover
-        ${isMenuOpened && 'navigation__burger_active'}`}
+        ${isMenuOpened ? 'navigation__burger_active' : ''}`}
         onClick={handleOpenMenu}
       >
         <span className={`navigation__burger-line
-        ${isMenuOpened && 'navigation__burger-line_active'}`}
+        ${isMenuOpened ? 'navigation__burger-line_active' : ''}`}
         />
       </button>
       <nav className={`navigation__links-container
-      ${isMenuOpened && 'navigation__links-container_opened'}`}
+      ${isMenuOpened ? 'navigation__links-container_opened' : ''}`}
       >
         <ul className={`navigation__links
-        ${isMenuOpened && 'navigation__links_opened'}`}
+        ${isMenuOpened ? 'navigation__links_opened' : ''}`}
         >
           <li
             className="
@@ -84,7 +84,7 @@ const Navigation = () => {
           </li>
         </ul>
       </nav>
-    </nav>
+    </div>
   );
 };
 

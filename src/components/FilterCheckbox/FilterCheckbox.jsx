@@ -10,7 +10,7 @@ const FilterCheckbox = () => {
 
   return (
     <label
-      className="filter-checkbox__toggle-switch button-hover"
+      className="filter-checkbox button-hover"
       htmlFor="checkbox"
     >
       <input

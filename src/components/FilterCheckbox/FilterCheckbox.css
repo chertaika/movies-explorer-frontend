@@ -1,4 +1,4 @@
-.filter-checkbox__toggle-switch {
+.filter-checkbox {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -45,7 +45,7 @@
 }
 
 @media screen and (max-width: 670px) {
-  .filter-checkbox__toggle-switch {
+  .filter-checkbox {
     font-size: 11px;
     gap: 13px;
   }

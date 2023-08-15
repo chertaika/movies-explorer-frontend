@@ -11,6 +11,7 @@ const SearchForm = () => (
           name="search"
           placeholder="Фильм"
           autoComplete="off"
+          required
         />
         <button
           className="search-form__submit-btn button-hover"

@@ -42,7 +42,7 @@ const MoviesCardList = ({ movies, isSavedMovies }) => {
 
   return (
     <section
-      className={`movies-card-list ${isSavedMovies && 'movies-card-list_type_saved-movies'}`}
+      className={`movies-card-list ${isSavedMovies ? 'movies-card-list_type_saved-movies' : ''}`}
     >
       {testMovies.length !== 0
         ? (

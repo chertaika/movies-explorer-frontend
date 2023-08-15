@@ -11,12 +11,12 @@ const AuthInput = ({
   errorMessage,
   handleChange,
 }) => (
-  <label className="auth-input__field">
+  <label className="auth-input">
     <span className="auth-input__label">{placeholder}</span>
     <input
       type={type}
       placeholder={placeholder}
-      className={`auth-input ${type === 'password' && 'auth-input_type_password'} ${errorMessage && 'auth-input_type_error'}`}
+      className={`auth-input__input ${type === 'password' && 'auth-input__input_type_password'} ${errorMessage && 'auth-input__input_type_error'}`}
       name={name}
       minLength={minLength}
       maxLength={maxLength}

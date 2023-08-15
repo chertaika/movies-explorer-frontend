@@ -10,7 +10,7 @@ import Footer from '../Footer/Footer';
 const Main = () => (
   <>
     <Header isLanding="true" />
-    <main className="page">
+    <main>
       <Promo />
       <NavTab />
       <AboutProject />
