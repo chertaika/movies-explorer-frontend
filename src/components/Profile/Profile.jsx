@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import useFormValidator from '../../hooks/useFormValidator';
 
-const Profile = () => {
+const Profile = ({ onLogout }) => {
   const [isEditProfile, setIsEditProfile] = useState(false);
 
   const {
@@ -41,9 +41,9 @@ const Profile = () => {
                 maxLength="30"
                 required
                 onChange={handleChange}
-                value={inputValues.name}
+                value={inputValues.name ?? ''}
                 autoComplete="off"
-                disabled={!isEditProfile && 'true'}
+                disabled={!isEditProfile && true}
               />
               <span
                 className="profile__error"
@@ -60,9 +60,9 @@ const Profile = () => {
                 name="email"
                 required
                 onChange={handleChange}
-                value={inputValues.email}
+                value={inputValues.email ?? ''}
                 autoComplete="off"
-                disabled={!isEditProfile && 'true'}
+                disabled={!isEditProfile && true}
               />
               <span
                 className="profile__error"
@@ -81,7 +81,7 @@ const Profile = () => {
                   type="submit"
                   disabled={!isValid}
                 >
-                  {isEditProfile ? 'Сохранить' : 'Редактировать'}
+                  Сохранить
                 </button>
               </>
             )}
@@ -93,9 +93,9 @@ const Profile = () => {
                 type="button"
                 onClick={handleClickEditProfile}
               >
-                {isEditProfile ? 'Сохранить' : 'Редактировать'}
+                Редактировать
               </button>
-              <button className="profile__logout button-hover" type="button">Выйти из аккаунта</button>
+              <button className="profile__logout button-hover" type="button" onClick={onLogout}>Выйти из аккаунта</button>
             </>
             )}
           </form>

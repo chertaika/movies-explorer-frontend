@@ -1,6 +1,6 @@
 # Movies Explorer (фронтенд)
 
-#### [Ссылка не репозиторий](https://github.com/chertaika/react-mesto-api-full-gha)
+#### [Ссылка не репозиторий](https://github.com/chertaika/movies-explorer-frontend)
 
 #### Макет dark-3
 
