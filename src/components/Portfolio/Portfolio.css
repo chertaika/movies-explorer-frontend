@@ -1,0 +1,118 @@
+.portfolio {
+  padding-top: 101px;
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  transition: padding .5s;
+}
+
+.portfolio__title {
+  margin: 0;
+  color: #8B8B8B;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.portfolio__links {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio__links-item {
+  border-bottom: 1px solid #424242;
+}
+
+.portfolio__links-item:last-of-type {
+  border-bottom: none;
+}
+
+.portfolio__link {
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  gap: 10px;
+  align-items: center;
+  color: #fff;
+  font-size: 30px;
+  line-height: 50px;
+  padding-top: 20px;
+  padding-bottom: 19px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: -1.2px;
+}
+
+.portfolio__link-icon {
+  display: block;
+  width: 17px;
+  aspect-ratio: 1/1;
+  background-image: url("../../assets/images/arrow-top-right.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 7px;
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 769px){
+  .portfolio {
+    padding-top: 91px;
+    gap: 29px;
+  }
+
+  .portfolio__title {
+    color: #A0A0A0;
+  }
+
+  .portfolio__links-item {
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    letter-spacing: -1.1px;
+    grid-template-columns: 1fr 22px;
+  }
+
+  .portfolio__link-icon {
+    width: 16px;
+    margin-right: 6px;
+  }
+}
+
+@media screen and (max-width: 670px){
+  .portfolio {
+    padding-top: 70px;
+    gap: 20px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__links-item {
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+    padding-top: 21px;
+    padding-bottom: 18px;
+    letter-spacing: -0.7px;
+    -webkit-tap-highlight-color: transparent;
+    grid-template-columns: 1fr 15px;
+  }
+
+  .portfolio__link-icon {
+    align-self: start;
+    width: 11px;
+    margin-right: 4px;
+    margin-top: 6px;
+  }
+}
