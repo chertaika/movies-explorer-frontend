@@ -8,8 +8,8 @@ const LOGOUT_ENDPOINT = '/logout';
 const USER_ENDPOINT = '/users/me';
 
 const mainApiSettings = {
-  // baseUrl: 'https://api.chertaika.nomoreparties.co',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.chertaika.nomoreparties.co',
+  // baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },

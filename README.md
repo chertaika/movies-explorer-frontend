@@ -2,6 +2,10 @@
 
 #### [Ссылка не репозиторий](https://github.com/chertaika/movies-explorer-frontend)
 
+#### [Ссылка не pull-request](https://github.com/chertaika/movies-explorer-frontend/pull/2)
+
+#### [Ссылка не деплой](https://chertaika.nomoreparties.co/)
+
 #### Макет dark-3
 
 
