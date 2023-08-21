@@ -49,7 +49,7 @@ const Profile = ({
             <label className="profile__field">
               <span className="profile__label">Имя</span>
               <input
-                className={`profile__input ${isEditProfile ? 'profile__input_active' : ''} ${errorMessages.name ? 'profile__input_active-error' : ''}`}
+                className={`profile__input ${isEditProfile ? 'profile__input_active' : ''}`}
                 type="text"
                 placeholder="Имя"
                 name="name"

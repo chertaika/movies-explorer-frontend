@@ -12,25 +12,40 @@ import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import {
+  AUTH_ENDPOINT,
   AUTH_ERROR_MESSAGE,
+  BUTTON_AUTH_BLOCKED_TEXT,
+  BUTTON_AUTH_TEXT,
+  BUTTON_REG_BLOCKED_TEXT,
+  BUTTON_REG_TEXT,
+  BUTTON_SAVE_BLOCKED_TEXT,
+  BUTTON_SAVE_TEXT,
+  ERROR,
   INVALID_AUTH_DATA_ERROR_MESSAGE,
   INVALID_REG_DATA_MESSAGE,
+  MOVIES_ENDPOINT,
   NOT_UNIQUE_EMAIL_ERROR_MESSAGE,
-  REG_ERROR_MESSAGE, UPDATE_USER_ERROR_MESSAGE, UPDATE_USER_MESSAGE,
+  PROFILE_ENDPOINT,
+  REG_ENDPOINT,
+  REG_ERROR_MESSAGE,
+  SAVED_MOVIES_ENDPOINT,
+  UNAUTHORIZED_ERROR_MESSAGE,
+  UPDATE_USER_ERROR_MESSAGE,
+  UPDATE_USER_MESSAGE,
 } from '../../utils/constants';
 
 const App = () => {
   // состояние кнопок попапов
   const [buttonLogin, setButtonLogin] = useState({
-    buttonText: 'Войти',
+    buttonText: BUTTON_AUTH_TEXT,
     block: false,
   });
   const [buttonRegister, setButtonRegister] = useState({
-    buttonText: 'Зарегистрироваться',
+    buttonText: BUTTON_REG_TEXT,
     block: false,
   });
   const [buttonUpdateUser, setButtonUpdateUser] = useState({
-    buttonText: 'Сохранить',
+    buttonText: BUTTON_SAVE_TEXT,
     block: false,
   });
 
@@ -59,7 +74,7 @@ const App = () => {
       const savedMovie = await mainApi.saveMovie(movie);
       setSavedMovies([...savedMovies, savedMovie]);
     } catch (error) {
-      console.log(`Ошибка: ${error}`);
+      console.log(`${ERROR}: ${error}`);
     }
   };
 
@@ -69,14 +84,14 @@ const App = () => {
       const updatedSavedMovies = savedMovies.filter(({ _id }) => _id !== deleteMovieId);
       setSavedMovies(updatedSavedMovies);
     } catch (error) {
-      console.log(`Ошибка: ${error}`);
+      console.log(`${ERROR}: ${error}`);
     }
   };
 
   const handleUpdateUser = async (userInfo) => {
     try {
       setUpdateUserInfo({ message: '', isSuccess: true });
-      setButtonUpdateUser({ buttonText: 'Сохранение...', block: true });
+      setButtonUpdateUser({ buttonText: BUTTON_SAVE_BLOCKED_TEXT, block: true });
       const user = await mainApi.updateUserInfo(userInfo);
       setCurrentUser(user);
       setUpdateUserInfo({ message: UPDATE_USER_MESSAGE, isSuccess: true });
@@ -87,18 +102,18 @@ const App = () => {
       } else {
         setUpdateUserInfo({ message: UPDATE_USER_ERROR_MESSAGE, isSuccess: false });
       }
-      console.log(`Ошибка: ${error}`);
+      console.log(`${ERROR}: ${error}`);
     } finally {
-      setButtonUpdateUser({ buttonText: 'Сохранить', block: false });
+      setButtonUpdateUser({ buttonText: BUTTON_SAVE_TEXT, block: false });
     }
   };
 
   const handleRegistration = async (data) => {
     try {
-      setButtonRegister({ buttonText: 'Регистрация...', block: true });
+      setButtonRegister({ buttonText: BUTTON_REG_BLOCKED_TEXT, block: true });
       await mainApi.registration(data);
       setRegErrorMessage('');
-      navigate('/signin', { replace: true });
+      navigate(AUTH_ENDPOINT, { replace: true });
     } catch (error) {
       if (error === 409) {
         setRegErrorMessage(NOT_UNIQUE_EMAIL_ERROR_MESSAGE);
@@ -107,15 +122,15 @@ const App = () => {
       } else {
         setRegErrorMessage(REG_ERROR_MESSAGE);
       }
-      console.log(`Ошибка: ${error}`);
+      console.log(`${ERROR}: ${error}`);
     } finally {
-      setButtonRegister({ buttonText: 'Зарегистрироваться', block: false });
+      setButtonRegister({ buttonText: BUTTON_REG_TEXT, block: false });
     }
   };
 
   const handleAuthorization = async (data) => {
     try {
-      setButtonLogin({ buttonText: 'Вход...', block: true });
+      setButtonLogin({ buttonText: BUTTON_AUTH_BLOCKED_TEXT, block: true });
       await mainApi.authorization(data);
       setAuthErrorMessage('');
       setIsLoggedIn(true);
@@ -125,9 +140,9 @@ const App = () => {
       } else {
         setAuthErrorMessage(AUTH_ERROR_MESSAGE);
       }
-      console.log(`Ошибка: ${error}`);
+      console.log(`${ERROR}: ${error}`);
     } finally {
-      setButtonLogin({ buttonText: 'Войти', block: false });
+      setButtonLogin({ buttonText: BUTTON_AUTH_TEXT, block: false });
     }
   };
 
@@ -135,10 +150,10 @@ const App = () => {
     try {
       await mainApi.logout();
       setIsLoggedIn(false);
-      navigate('/signin', { replace: true });
+      navigate(AUTH_ENDPOINT, { replace: true });
       localStorage.clear();
     } catch (error) {
-      console.log(`Ошибка: ${error}`);
+      console.log(`${ERROR}: ${error}`);
     }
   };
 
@@ -152,13 +167,13 @@ const App = () => {
         setCurrentUser(user);
         setSavedMovies(savedUserMovies);
         setIsLoggedIn(true);
-        navigate('/movies', { replace: true });
+        navigate(MOVIES_ENDPOINT, { replace: true });
       } catch (error) {
         if (error === 401) {
-          console.log(`Ошибка: ${error} Необходима авторизация`);
+          console.log(`${ERROR}: ${error} ${UNAUTHORIZED_ERROR_MESSAGE}`);
           return;
         }
-        console.log(`Ошибка: ${error}`);
+        console.log(`${ERROR}: ${error}`);
       }
     })();
   }, [isLoggedIn]);
@@ -171,7 +186,7 @@ const App = () => {
           element={<Main isLoggedIn={isLoggedIn} />}
         />
         <Route
-          path="/profile"
+          path={PROFILE_ENDPOINT}
           element={(
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Profile
@@ -188,7 +203,7 @@ const App = () => {
           )}
         />
         <Route
-          path="/movies"
+          path={MOVIES_ENDPOINT}
           element={(
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Movies
@@ -202,7 +217,7 @@ const App = () => {
         />
 
         <Route
-          path="/saved-movies"
+          path={SAVED_MOVIES_ENDPOINT}
           element={(
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <SavedMovies
@@ -214,7 +229,7 @@ const App = () => {
           )}
         />
         <Route
-          path="/signup"
+          path={REG_ENDPOINT}
           element={(
             <Register
               onRegister={handleRegistration}
@@ -225,7 +240,7 @@ const App = () => {
           )}
         />
         <Route
-          path="/signin"
+          path={AUTH_ENDPOINT}
           element={(
             <Login
               onLogin={handleAuthorization}

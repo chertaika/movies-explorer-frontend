@@ -49,6 +49,10 @@ const MoviesCardList = ({
     });
   }, [initialCount, currentPage, movies]);
 
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [movies]);
+
   const handleIsSaved = (movie) => {
     if (!isSavedMovies) {
       const savedMovie = savedMovies.find(film => film.movieId === movie.id);

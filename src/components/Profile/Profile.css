@@ -77,7 +77,7 @@
   text-align: center;
 }
 
-.profile__input_active-error {
+.profile__input_active:invalid {
   border: 1px solid rgba(344, 78, 93, .4);
 }
 

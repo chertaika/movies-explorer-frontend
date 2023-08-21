@@ -9,7 +9,7 @@ const SearchForm = ({ onSubmit, onChange, isShortMovie }) => {
   const isSavedMovies = pathname === '/saved-movies';
 
   const {
-    inputValues, handleChange, setInputValues,
+    inputValues, errorMessages, handleChange, isValid, setInputValues,
   } = useFormValidator();
 
   const handleSearch = (evt) => {
@@ -26,10 +26,10 @@ const SearchForm = ({ onSubmit, onChange, isShortMovie }) => {
 
   return (
     <section className="search-form">
-      <form className="search-form__form" name="search" onSubmit={handleSearch}>
+      <form className="search-form__form" name="search" onSubmit={handleSearch} noValidate>
         <div className="search-form__search-bar">
           <input
-            className="search-form__input"
+            className={`search-form__input ${errorMessages.search ? 'search-form__input_type_error' : ''}`}
             type="text"
             name="search"
             placeholder="Фильм"
@@ -42,8 +42,10 @@ const SearchForm = ({ onSubmit, onChange, isShortMovie }) => {
             className="search-form__submit-btn button-hover"
             type="submit"
             aria-label="Поиск"
+            disabled={!isValid}
           />
         </div>
+        <span className="search-form__error">{errorMessages.search}</span>
         <FilterCheckbox onChange={onChange} value={isShortMovie} />
       </form>
     </section>

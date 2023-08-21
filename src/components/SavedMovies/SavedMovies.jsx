@@ -7,10 +7,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import {
   SEARCH_NOT_FOUND_MESSAGE,
   SEARCH_REQUEST_ERROR_MESSAGE,
-  SHORT_MOVIES_DURATION,
 } from '../../utils/constants';
+import useMoviesFilter from '../../hooks/useMoviesFilter';
 
 const SavedMovies = ({ isLoggedIn, savedMovies, onDeleteMovie }) => {
+  const { filterMovies } = useMoviesFilter();
   const [message, setMessage] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [requestText, setRequestText] = useState('');
@@ -22,18 +23,6 @@ const SavedMovies = ({ isLoggedIn, savedMovies, onDeleteMovie }) => {
 
   const handleCheckbox = () => {
     setIsShortMovie(!isShortMovie);
-  };
-
-  const filterShortMovies = movie => movie
-    .filter(({ duration }) => duration <= SHORT_MOVIES_DURATION);
-
-  const filterMovies = (movies, request, isShort) => {
-    const searchedMovies = movies
-      .filter(({ nameRU }) => nameRU.toLowerCase().includes(request.toLowerCase()));
-    if (isShort) {
-      return filterShortMovies(searchedMovies);
-    }
-    return searchedMovies;
   };
 
   const handleSearchMovies = async (request, isShort) => {

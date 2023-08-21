@@ -9,8 +9,8 @@ import moviesApi from '../../utils/MoviesApi';
 import {
   SEARCH_NOT_FOUND_MESSAGE,
   SEARCH_REQUEST_ERROR_MESSAGE,
-  SHORT_MOVIES_DURATION,
 } from '../../utils/constants';
+import useMoviesFilter from '../../hooks/useMoviesFilter';
 
 const Movies = ({
   isLoggedIn,
@@ -18,6 +18,7 @@ const Movies = ({
   onSaveMovies,
   savedMovies,
 }) => {
+  const { filterMovies, filterShortMovies } = useMoviesFilter();
   const savedCheckbox = JSON.parse(localStorage.getItem('isShortMovie')) ?? false;
   const [allMovies, setAllMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -37,18 +38,6 @@ const Movies = ({
   const handleCheckbox = () => {
     setIsShortMovie(!isShortMovie);
     localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
-  };
-
-  const filterShortMovies = movie => movie
-    .filter(({ duration }) => duration <= SHORT_MOVIES_DURATION);
-
-  const filterMovies = (movies, request, isShort) => {
-    const searchedMovies = movies
-      .filter(({ nameRU }) => nameRU.toLowerCase().includes(request.toLowerCase()));
-    if (isShort) {
-      return filterShortMovies(searchedMovies);
-    }
-    return searchedMovies;
   };
 
   const handleFilterMovies = (movies, request, isShort) => {
