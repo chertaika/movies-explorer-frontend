@@ -253,18 +253,25 @@ const testMovies = [
   },
 ];
 
-const MOVIES_PER_PAGE_1280 = 12;
-const MOVIES_PER_PAGE_768 = 8;
-const MOVIES_PER_PAGE_320 = 5;
+const MOVIES_PER_PAGE_1280 = { initial: 12, step: 3 };
+const MOVIES_PER_PAGE_768 = { initial: 8, step: 2 };
+const MOVIES_PER_PAGE_320 = { initial: 5, step: 2 };
+
+const SEARCH_REQUEST_ERROR = 'Во время запроса произошла ошибка. Возможно,'
+  + 'проблема с соединением или сервер недоступен. Подождите немного'
+  + 'и попробуйте ещё раз';
+const SEARCH_NOT_FOUND = 'Ничего не найдено';
+const NO_SAVED_FOUND = 'Нет сохранённых фильмов';
 
 const mainApiSettings = {
-  baseUrl: 'https://api.chertaika.nomoreparties.co',
+  // baseUrl: 'https://api.chertaika.nomoreparties.co',
+  baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
   endpoints: {
     userEndpoint: '/users/me',
-    moviesEndpoint: '/cards',
+    moviesEndpoint: '/movies',
     regEndpoint: '/signup',
     authEndpoint: '/signin',
     logoutEndpoint: '/logout',
@@ -292,4 +299,7 @@ export {
   METHOD_PATCH,
   METHOD_POST,
   METHOD_DELETE,
+  SEARCH_REQUEST_ERROR,
+  SEARCH_NOT_FOUND,
+  NO_SAVED_FOUND,
 };

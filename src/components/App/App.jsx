@@ -1,22 +1,18 @@
 import './App.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import { testMovies } from '../../utils/constants';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 const App = () => {
-  // анимация загрузки
-  const [isLoading, setIsLoading] = useState(true);
-  console.log(isLoading);
   // состояние кнопок попапов
   const [buttonLogin, setButtonLogin] = useState({
     buttonText: 'Войти',
@@ -26,22 +22,37 @@ const App = () => {
     buttonText: 'Зарегистрироваться',
     block: false,
   });
-  // // текущая карточка
-  // const [selectedCard, setSelectedCard] = useState(null);
-  // // данные удаляемой карточки
-  // const [deletedCardId, setDeletedCardId] = useState(null);
-  // состояние регистрации
+
   const [requestErrorMessage, setRequestErrorMessage] = useState('');
   // состояние авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // // e-mail пользователя
-  // const [userEmail, setUserEmail] = useState(null);
-  // // данные пользователя
+  // данные пользователя
   const [currentUser, setCurrentUser] = useState({});
+  // сохраненные фильмы
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
 
-  const handleRegistration = useCallback(async (data) => {
+  const handleSaveMovie = async (movie) => {
+    try {
+      const savedMovie = await mainApi.saveMovie(movie);
+      setSavedMovies([...savedMovies, savedMovie]);
+    } catch (error) {
+      console.log(`Ошибка: ${error}`);
+    }
+  };
+
+  const handleDeleteMovie = async (movieId) => {
+    try {
+      const { _id: deleteMovieId } = await mainApi.deleteSavedMovie(movieId);
+      const updatedSavedMovies = savedMovies.filter(({ _id }) => _id !== deleteMovieId);
+      setSavedMovies(updatedSavedMovies);
+    } catch (error) {
+      console.log(`Ошибка: ${error}`);
+    }
+  };
+
+  const handleRegistration = async (data) => {
     try {
       setButtonRegister({ buttonText: 'Регистрация...', block: true });
       await mainApi.registration(data);
@@ -57,13 +68,12 @@ const App = () => {
     } finally {
       setButtonRegister({ buttonText: 'Зарегистрироваться', block: false });
     }
-  }, []);
+  };
 
-  const handleAuthorization = useCallback(async (data) => {
+  const handleAuthorization = async (data) => {
     try {
       setButtonLogin({ buttonText: 'Вход...', block: true });
       await mainApi.authorization(data);
-      setIsLoading(true);
       setIsLoggedIn(true);
     } catch (error) {
       if (error === 401) {
@@ -71,18 +81,18 @@ const App = () => {
       } else {
         setRequestErrorMessage('Что-то пошло не так! Попробуйте еще раз');
       }
-      setIsLoading(false);
       console.log(`Ошибка: ${error}`);
     } finally {
       setButtonLogin({ buttonText: 'Войти', block: false });
     }
-  }, []);
+  };
 
   const handleLogout = async () => {
     try {
       await mainApi.logout();
       setIsLoggedIn(false);
       navigate('/signin', { replace: true });
+      localStorage.clear();
     } catch (error) {
       console.log(`Ошибка: ${error}`);
     }
@@ -91,12 +101,15 @@ const App = () => {
   useEffect(() => {
     (async () => {
       try {
-        const user = await mainApi.getUserInfo();
+        const [user, savedUserMovies] = await Promise.all([
+          mainApi.getUserInfo(),
+          mainApi.getSavedMovies(),
+        ]);
         setCurrentUser(user);
+        setSavedMovies(savedUserMovies);
         setIsLoggedIn(true);
         navigate('/movies', { replace: true });
       } catch (error) {
-        setIsLoading(false);
         if (error === 401) {
           console.log(`Ошибка: ${error} Необходима авторизация`);
           return;
@@ -111,32 +124,41 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Main />}
+          element={<Main isLoggedIn={isLoggedIn} />}
         />
         <Route
           path="/profile"
           element={(
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Profile onLogout={handleLogout} />
+              <Profile isLoggedIn={isLoggedIn} onLogout={handleLogout} />
             </ProtectedRoute>
-        )}
+          )}
         />
         <Route
           path="/movies"
           element={(
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Movies movies={testMovies} />
+              <Movies
+                isLoggedIn={isLoggedIn}
+                onSaveMovies={handleSaveMovie}
+                onDeleteMovie={handleDeleteMovie}
+                savedMovies={savedMovies}
+              />
             </ProtectedRoute>
-        )}
+          )}
         />
 
         <Route
           path="/saved-movies"
           element={(
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <SavedMovies movies={testMovies} />
+              <SavedMovies
+                isLoggedIn={isLoggedIn}
+                savedMovies={savedMovies}
+                onDeleteMovie={handleDeleteMovie}
+              />
             </ProtectedRoute>
-        )}
+          )}
         />
         <Route
           path="/signup"
@@ -146,7 +168,7 @@ const App = () => {
               requestErrorMessage={requestErrorMessage}
               buttonState={buttonRegister}
             />
-)}
+          )}
         />
         <Route
           path="/signin"
@@ -156,7 +178,7 @@ const App = () => {
               requestErrorMessage={requestErrorMessage}
               buttonState={buttonLogin}
             />
-)}
+          )}
         />
         <Route
           path="*"

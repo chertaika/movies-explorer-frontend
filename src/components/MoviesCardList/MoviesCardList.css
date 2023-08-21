@@ -22,10 +22,12 @@
 }
 
 .movies-card-list__title {
-  margin: 50px 0 0;
+  margin: 50px 20px 0;
   color: #fff;
   font-size: 16px;
   font-weight: 400;
+  max-width: 410px;
+  text-align: center;
 }
 
 .movies-card-list__btn {

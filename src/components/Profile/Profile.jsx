@@ -1,10 +1,12 @@
 import './Profile.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import useFormValidator from '../../hooks/useFormValidator';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-const Profile = ({ onLogout }) => {
+const Profile = ({ onLogout, isLoggedIn }) => {
   const [isEditProfile, setIsEditProfile] = useState(false);
+  const { name, email } = useContext(CurrentUserContext);
 
   const {
     inputValues,
@@ -20,15 +22,15 @@ const Profile = ({ onLogout }) => {
   };
 
   useEffect(() => {
-    setInputValues({ name: 'Екатерина', email: 'test@test.ru' });
+    setInputValues({ name, email });
   }, []);
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <main className="profile">
         <div className="profile__container">
-          <h1 className="profile__title">Привет, Екатерина!</h1>
+          <h1 className="profile__title">{`Привет, ${name}!`}</h1>
           <form className="profile__form" name="profile">
             <label className="profile__field">
               <span className="profile__label">Имя</span>

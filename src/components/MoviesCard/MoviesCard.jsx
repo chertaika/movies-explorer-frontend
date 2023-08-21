@@ -3,15 +3,23 @@ import { useState } from 'react';
 import imageError from '../../assets/images/no-photo.svg';
 
 const MoviesCard = ({
-  movie: {
-    duration, trailerLink, image, nameRU,
-  },
+  movie,
   isSavedMovies,
+  onClick,
+  isSaved,
 }) => {
+  const {
+    duration,
+    trailerLink,
+    image,
+    nameRU,
+  } = movie;
   const [isImageError, setIsImageError] = useState(false);
+  const movieImage = isSavedMovies ? image : `https://api.nomoreparties.co/${image.url}`;
 
   const handleClick = (evt) => {
     evt.target.classList.toggle('movies-card__save-btn_active');
+    onClick(movie);
   };
 
   const convertDuration = () => {
@@ -29,7 +37,7 @@ const MoviesCard = ({
       <a href={trailerLink} className="movies-card__link" target="_blank" rel="noreferrer">
         <img
           className={`movies-card__image ${isImageError ? 'movies-card__image_type_error' : ''}`}
-          src={!isImageError ? image : imageError}
+          src={!isImageError ? movieImage : imageError}
           alt={nameRU}
           onError={handleImageError}
         />
@@ -42,11 +50,12 @@ const MoviesCard = ({
               className="movies-card__delete-btn button-hover"
               type="button"
               aria-label="Сохранить"
+              onClick={handleClick}
             />
           )
           : (
             <button
-              className="movies-card__save-btn button-hover"
+              className={`movies-card__save-btn ${isSaved ? 'movies-card__save-btn_active' : ''} button-hover`}
               type="button"
               aria-label="Сохранить"
               onClick={handleClick}

@@ -61,12 +61,24 @@ class MainApi {
     return this._request(this._moviesEndpoint, {
       method: METHOD_POST,
       credentials: 'include',
-      body: JSON.stringify(movie),
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+      }),
     });
   }
 
-  deleteSavedMovie(MovieId) {
-    return this._request(`${this._moviesEndpoint}/${MovieId}`, {
+  deleteSavedMovie(movieId) {
+    return this._request(`${this._moviesEndpoint}/${movieId}`, {
       method: METHOD_DELETE,
       credentials: 'include',
     });

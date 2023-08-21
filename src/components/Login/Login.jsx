@@ -32,7 +32,7 @@ const Login = ({ onLogin, requestErrorMessage, buttonState }) => {
         inputValue={inputValues.email}
         errorMessage={errorMessages.email}
         handleChange={handleChange}
-        autoComplete
+        autoComplete="on"
         required
       />
       <AuthInput
@@ -43,7 +43,7 @@ const Login = ({ onLogin, requestErrorMessage, buttonState }) => {
         errorMessage={errorMessages.password}
         minLength="8"
         handleChange={handleChange}
-        autoComplete
+        autoComplete="on"
         required
       />
     </Authentication>
