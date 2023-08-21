@@ -20,7 +20,7 @@ const Movies = ({
 }) => {
   const { filterMovies, filterShortMovies } = useMoviesFilter();
   const savedCheckbox = JSON.parse(localStorage.getItem('isShortMovie')) ?? false;
-  const [allMovies, setAllMovies] = useState([]);
+  const allMovies = JSON.parse(localStorage.getItem('initialMovies')) ?? [];
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -56,9 +56,9 @@ const Movies = ({
     setMessage('');
     if (!allMovies.length) {
       try {
-        const initialMovies = await moviesApi.getInitialMovies();
-        setAllMovies(initialMovies);
-        handleFilterMovies(initialMovies, request, isShort);
+        const movies = await moviesApi.getInitialMovies();
+        localStorage.setItem('initialMovies', JSON.stringify(movies));
+        handleFilterMovies(movies, request, isShort);
       } catch (error) {
         setMessage(SEARCH_REQUEST_ERROR_MESSAGE);
         console.log(`Ошибка: ${error}`);

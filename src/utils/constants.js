@@ -34,6 +34,11 @@ const METHOD_PATCH = 'PATCH';
 const METHOD_POST = 'POST';
 const METHOD_DELETE = 'DELETE';
 
+// коды ошибок запросов
+const ERROR_CODE_409 = 409;
+const ERROR_CODE_401 = 401;
+const ERROR_CODE_400 = 400;
+
 // регулярные выражения валидации
 const EMAIL_REGEX = '^[a-zA-Z0-9+_.\\-]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]{2,4}$';
 const NAME_REGEX = '[A-Za-zА-Яа-яЁё\\s\\-]+';
@@ -106,4 +111,7 @@ export {
   BUTTON_AUTH_TEXT,
   BUTTON_AUTH_BLOCKED_TEXT,
   ERROR,
+  ERROR_CODE_409,
+  ERROR_CODE_401,
+  ERROR_CODE_400,
 };

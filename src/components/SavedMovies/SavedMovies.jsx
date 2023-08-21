@@ -22,13 +22,17 @@ const SavedMovies = ({ isLoggedIn, savedMovies, onDeleteMovie }) => {
   };
 
   const handleCheckbox = () => {
-    setIsShortMovie(!isShortMovie);
+    if (savedMovies) {
+      setIsShortMovie(!isShortMovie);
+    }
   };
 
   const handleSearchMovies = async (request, isShort) => {
-    setMessage('');
-    setRequestText(request);
-    setFilteredMovies(filterMovies(savedMovies, request, isShort));
+    if (savedMovies) {
+      setMessage('');
+      setRequestText(request);
+      setFilteredMovies(filterMovies(savedMovies, request, isShort));
+    }
   };
 
   useEffect(() => {

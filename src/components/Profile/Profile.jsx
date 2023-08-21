@@ -23,6 +23,7 @@ const Profile = ({
     isValid,
     handleChange,
     setInputValues,
+    setIsValid,
   } = useFormValidator();
 
   const handleSubmit = (evt) => {
@@ -38,6 +39,12 @@ const Profile = ({
   useEffect(() => {
     resetRequestMessage();
   }, []);
+
+  useEffect(() => {
+    if (inputValues.name === name && inputValues.email === email) {
+      setIsValid(false);
+    }
+  }, [inputValues]);
 
   return (
     <>

@@ -28,6 +28,10 @@
 }
 
 .auth-input__input_type_password {
+  color: #3DDC84;
+}
+
+.auth-input__input_type_password:invalid {
   color: #EE3465;
 }
 
