@@ -1,9 +1,16 @@
 import './Login.css';
+import { useEffect } from 'react';
 import Authentication from '../Authentication/Authentication';
 import useFormValidator from '../../hooks/useFormValidator';
 import AuthInput from '../AuthInput/AuthInput';
+import { EMAIL_REGEX } from '../../utils/constants';
 
-const Login = ({ onLogin, requestErrorMessage, buttonState }) => {
+const Login = ({
+  onLogin,
+  requestErrorMessage,
+  buttonState,
+  resetRequestError,
+}) => {
   const {
     inputValues, errorMessages, isValid, handleChange,
   } = useFormValidator();
@@ -12,6 +19,10 @@ const Login = ({ onLogin, requestErrorMessage, buttonState }) => {
     evt.preventDefault();
     onLogin(inputValues);
   };
+
+  useEffect(() => {
+    resetRequestError();
+  }, []);
 
   return (
     <Authentication
@@ -32,6 +43,7 @@ const Login = ({ onLogin, requestErrorMessage, buttonState }) => {
         inputValue={inputValues.email}
         errorMessage={errorMessages.email}
         handleChange={handleChange}
+        pattern={EMAIL_REGEX}
         autoComplete="on"
         required
       />

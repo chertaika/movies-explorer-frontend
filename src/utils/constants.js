@@ -253,16 +253,6 @@ const testMovies = [
   },
 ];
 
-const MOVIES_PER_PAGE_1280 = { initial: 12, step: 3 };
-const MOVIES_PER_PAGE_768 = { initial: 8, step: 2 };
-const MOVIES_PER_PAGE_320 = { initial: 5, step: 2 };
-
-const SEARCH_REQUEST_ERROR = 'Во время запроса произошла ошибка. Возможно,'
-  + 'проблема с соединением или сервер недоступен. Подождите немного'
-  + 'и попробуйте ещё раз';
-const SEARCH_NOT_FOUND = 'Ничего не найдено';
-const NO_SAVED_FOUND = 'Нет сохранённых фильмов';
-
 const mainApiSettings = {
   // baseUrl: 'https://api.chertaika.nomoreparties.co',
   baseUrl: 'http://localhost:3000',
@@ -289,6 +279,24 @@ const METHOD_PATCH = 'PATCH';
 const METHOD_POST = 'POST';
 const METHOD_DELETE = 'DELETE';
 
+const EMAIL_REGEX = '^[a-zA-Z0-9+_.\\-]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]{2,4}$';
+const NAME_REGEX = '[A-Za-zА-Яа-яЁё\\s\\-]+';
+const MOVIES_PER_PAGE_1280 = { initial: 12, step: 3 };
+const MOVIES_PER_PAGE_768 = { initial: 8, step: 2 };
+const MOVIES_PER_PAGE_320 = { initial: 5, step: 2 };
+const SHORT_MOVIES_DURATION = 40;
+const SEARCH_REQUEST_ERROR_MESSAGE = 'Во время запроса произошла ошибка. Возможно,'
+  + 'проблема с соединением или сервер недоступен. Подождите немного'
+  + 'и попробуйте ещё раз';
+const SEARCH_NOT_FOUND_MESSAGE = 'Ничего не найдено';
+const NOT_UNIQUE_EMAIL_ERROR_MESSAGE = 'Пользователь с таким email уже существует.';
+const INVALID_REG_DATA_MESSAGE = 'Переданы некорректные данные при регистрации';
+const REG_ERROR_MESSAGE = 'При регистрации пользователя произошла ошибка.';
+const INVALID_AUTH_DATA_ERROR_MESSAGE = 'Вы ввели неправильный логин или пароль.';
+const AUTH_ERROR_MESSAGE = 'При авторизации пользователя произошла ошибка.';
+const UPDATE_USER_ERROR_MESSAGE = 'При обновлении профиля произошла ошибка.';
+const UPDATE_USER_MESSAGE = 'Данные успешно обновлены.';
+
 export {
   testMovies,
   MOVIES_PER_PAGE_1280,
@@ -299,7 +307,16 @@ export {
   METHOD_PATCH,
   METHOD_POST,
   METHOD_DELETE,
-  SEARCH_REQUEST_ERROR,
-  SEARCH_NOT_FOUND,
-  NO_SAVED_FOUND,
+  SEARCH_REQUEST_ERROR_MESSAGE,
+  SEARCH_NOT_FOUND_MESSAGE,
+  SHORT_MOVIES_DURATION,
+  NOT_UNIQUE_EMAIL_ERROR_MESSAGE,
+  INVALID_REG_DATA_MESSAGE,
+  REG_ERROR_MESSAGE,
+  INVALID_AUTH_DATA_ERROR_MESSAGE,
+  AUTH_ERROR_MESSAGE,
+  EMAIL_REGEX,
+  NAME_REGEX,
+  UPDATE_USER_ERROR_MESSAGE,
+  UPDATE_USER_MESSAGE,
 };

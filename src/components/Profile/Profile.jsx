@@ -1,11 +1,20 @@
 import './Profile.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import Header from '../Header/Header';
 import useFormValidator from '../../hooks/useFormValidator';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { EMAIL_REGEX, NAME_REGEX } from '../../utils/constants';
 
-const Profile = ({ onLogout, isLoggedIn }) => {
-  const [isEditProfile, setIsEditProfile] = useState(false);
+const Profile = ({
+  onLogout,
+  isLoggedIn,
+  onEdit,
+  onSubmit,
+  buttonState: { buttonText, block },
+  isEditProfile,
+  requestStatus: { message, isSuccess },
+  resetRequestMessage,
+}) => {
   const { name, email } = useContext(CurrentUserContext);
 
   const {
@@ -16,13 +25,18 @@ const Profile = ({ onLogout, isLoggedIn }) => {
     setInputValues,
   } = useFormValidator();
 
-  const handleClickEditProfile = (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    setIsEditProfile(!isEditProfile);
+    onSubmit(inputValues);
   };
 
   useEffect(() => {
     setInputValues({ name, email });
+    onEdit(false);
+  }, [name, email]);
+
+  useEffect(() => {
+    resetRequestMessage();
   }, []);
 
   return (
@@ -31,7 +45,7 @@ const Profile = ({ onLogout, isLoggedIn }) => {
       <main className="profile">
         <div className="profile__container">
           <h1 className="profile__title">{`Привет, ${name}!`}</h1>
-          <form className="profile__form" name="profile">
+          <form className="profile__form" name="profile" onSubmit={handleSubmit}>
             <label className="profile__field">
               <span className="profile__label">Имя</span>
               <input
@@ -46,6 +60,7 @@ const Profile = ({ onLogout, isLoggedIn }) => {
                 value={inputValues.name ?? ''}
                 autoComplete="off"
                 disabled={!isEditProfile && true}
+                pattern={NAME_REGEX}
               />
               <span
                 className="profile__error"
@@ -65,6 +80,7 @@ const Profile = ({ onLogout, isLoggedIn }) => {
                 value={inputValues.email ?? ''}
                 autoComplete="off"
                 disabled={!isEditProfile && true}
+                pattern={EMAIL_REGEX}
               />
               <span
                 className="profile__error"
@@ -72,28 +88,27 @@ const Profile = ({ onLogout, isLoggedIn }) => {
                 {errorMessages.email}
               </span>
             </label>
+
+            <p className={`profile__request-message ${!isSuccess ? 'profile__request-message_type_error' : ''}`}>
+              {message}
+            </p>
             {isEditProfile
-            && (
-              <>
-                <p className="profile__request-error">
-                  При обновлении профиля произошла ошибка.
-                </p>
-                <button
-                  className="profile__submit-btn button-hover"
-                  type="submit"
-                  disabled={!isValid}
-                >
-                  Сохранить
-                </button>
-              </>
-            )}
+                  && (
+                  <button
+                    className="profile__submit-btn button-hover"
+                    type="submit"
+                    disabled={!isValid || block}
+                  >
+                    {buttonText}
+                  </button>
+                  )}
             {!isEditProfile
             && (
             <>
               <button
                 className="profile__edit-btn button-hover"
                 type="button"
-                onClick={handleClickEditProfile}
+                onClick={() => onEdit(true)}
               >
                 Редактировать
               </button>

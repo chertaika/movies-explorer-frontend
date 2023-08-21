@@ -11,6 +11,13 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import {
+  AUTH_ERROR_MESSAGE,
+  INVALID_AUTH_DATA_ERROR_MESSAGE,
+  INVALID_REG_DATA_MESSAGE,
+  NOT_UNIQUE_EMAIL_ERROR_MESSAGE,
+  REG_ERROR_MESSAGE, UPDATE_USER_ERROR_MESSAGE, UPDATE_USER_MESSAGE,
+} from '../../utils/constants';
 
 const App = () => {
   // состояние кнопок попапов
@@ -22,16 +29,30 @@ const App = () => {
     buttonText: 'Зарегистрироваться',
     block: false,
   });
+  const [buttonUpdateUser, setButtonUpdateUser] = useState({
+    buttonText: 'Сохранить',
+    block: false,
+  });
 
-  const [requestErrorMessage, setRequestErrorMessage] = useState('');
+  const [regErrorMessage, setRegErrorMessage] = useState('');
+  const [authErrorMessage, setAuthErrorMessage] = useState('');
+  const [updateUserInfo, setUpdateUserInfo] = useState({ message: '', isSuccess: true });
   // состояние авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // состояние страницы профиля
+  const [isEditProfile, setIsEditProfile] = useState(false);
   // данные пользователя
   const [currentUser, setCurrentUser] = useState({});
   // сохраненные фильмы
   const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
+
+  const resetMessages = () => {
+    setRegErrorMessage('');
+    setAuthErrorMessage('');
+    setUpdateUserInfo({ message: '', isSuccess: true });
+  };
 
   const handleSaveMovie = async (movie) => {
     try {
@@ -52,17 +73,39 @@ const App = () => {
     }
   };
 
+  const handleUpdateUser = async (userInfo) => {
+    try {
+      setUpdateUserInfo({ message: '', isSuccess: true });
+      setButtonUpdateUser({ buttonText: 'Сохранение...', block: true });
+      const user = await mainApi.updateUserInfo(userInfo);
+      setCurrentUser(user);
+      setUpdateUserInfo({ message: UPDATE_USER_MESSAGE, isSuccess: true });
+      setIsEditProfile(false);
+    } catch (error) {
+      if (error === 409) {
+        setUpdateUserInfo({ message: NOT_UNIQUE_EMAIL_ERROR_MESSAGE, isSuccess: false });
+      } else {
+        setUpdateUserInfo({ message: UPDATE_USER_ERROR_MESSAGE, isSuccess: false });
+      }
+      console.log(`Ошибка: ${error}`);
+    } finally {
+      setButtonUpdateUser({ buttonText: 'Сохранить', block: false });
+    }
+  };
+
   const handleRegistration = async (data) => {
     try {
       setButtonRegister({ buttonText: 'Регистрация...', block: true });
       await mainApi.registration(data);
-      setRequestErrorMessage('');
+      setRegErrorMessage('');
       navigate('/signin', { replace: true });
     } catch (error) {
       if (error === 409) {
-        setRequestErrorMessage('Пользователь с таким email уже существует');
+        setRegErrorMessage(NOT_UNIQUE_EMAIL_ERROR_MESSAGE);
+      } else if (error === 400) {
+        setRegErrorMessage(INVALID_REG_DATA_MESSAGE);
       } else {
-        setRequestErrorMessage('При регистрации пользователя произошла ошибка.');
+        setRegErrorMessage(REG_ERROR_MESSAGE);
       }
       console.log(`Ошибка: ${error}`);
     } finally {
@@ -74,12 +117,13 @@ const App = () => {
     try {
       setButtonLogin({ buttonText: 'Вход...', block: true });
       await mainApi.authorization(data);
+      setAuthErrorMessage('');
       setIsLoggedIn(true);
     } catch (error) {
       if (error === 401) {
-        setRequestErrorMessage('Вы ввели неправильный логин или пароль.');
+        setAuthErrorMessage(INVALID_AUTH_DATA_ERROR_MESSAGE);
       } else {
-        setRequestErrorMessage('Что-то пошло не так! Попробуйте еще раз');
+        setAuthErrorMessage(AUTH_ERROR_MESSAGE);
       }
       console.log(`Ошибка: ${error}`);
     } finally {
@@ -130,7 +174,16 @@ const App = () => {
           path="/profile"
           element={(
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Profile isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+              <Profile
+                isLoggedIn={isLoggedIn}
+                onLogout={handleLogout}
+                buttonState={buttonUpdateUser}
+                onEdit={setIsEditProfile}
+                isEditProfile={isEditProfile}
+                onSubmit={handleUpdateUser}
+                requestStatus={updateUserInfo}
+                resetRequestMessage={resetMessages}
+              />
             </ProtectedRoute>
           )}
         />
@@ -165,8 +218,9 @@ const App = () => {
           element={(
             <Register
               onRegister={handleRegistration}
-              requestErrorMessage={requestErrorMessage}
+              requestErrorMessage={regErrorMessage}
               buttonState={buttonRegister}
+              resetRequestError={resetMessages}
             />
           )}
         />
@@ -175,8 +229,9 @@ const App = () => {
           element={(
             <Login
               onLogin={handleAuthorization}
-              requestErrorMessage={requestErrorMessage}
+              requestErrorMessage={authErrorMessage}
               buttonState={buttonLogin}
+              resetRequestError={resetMessages}
             />
           )}
         />

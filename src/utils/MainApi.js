@@ -42,7 +42,7 @@ class MainApi {
     return this._request(this._userEndpoint, { credentials: 'include' });
   }
 
-  editUserInfo({ name, email }) {
+  updateUserInfo({ name, email }) {
     return this._request(this._userEndpoint, {
       method: METHOD_PATCH,
       credentials: 'include',

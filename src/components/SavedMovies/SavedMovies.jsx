@@ -4,7 +4,11 @@ import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { NO_SAVED_FOUND, SEARCH_NOT_FOUND } from '../../utils/constants';
+import {
+  SEARCH_NOT_FOUND_MESSAGE,
+  SEARCH_REQUEST_ERROR_MESSAGE,
+  SHORT_MOVIES_DURATION,
+} from '../../utils/constants';
 
 const SavedMovies = ({ isLoggedIn, savedMovies, onDeleteMovie }) => {
   const [message, setMessage] = useState('');
@@ -20,7 +24,8 @@ const SavedMovies = ({ isLoggedIn, savedMovies, onDeleteMovie }) => {
     setIsShortMovie(!isShortMovie);
   };
 
-  const filterShortMovies = movie => movie.filter(({ duration }) => duration <= 40);
+  const filterShortMovies = movie => movie
+    .filter(({ duration }) => duration <= SHORT_MOVIES_DURATION);
 
   const filterMovies = (movies, request, isShort) => {
     const searchedMovies = movies
@@ -38,17 +43,16 @@ const SavedMovies = ({ isLoggedIn, savedMovies, onDeleteMovie }) => {
   };
 
   useEffect(() => {
-    const filteredFilms = filterMovies(savedMovies, requestText, isShortMovie);
-    if (filteredFilms.length === 0) {
-      setMessage(SEARCH_NOT_FOUND);
+    if (savedMovies) {
+      const filteredFilms = filterMovies(savedMovies, requestText, isShortMovie);
+      if (filteredFilms.length === 0) {
+        setMessage(SEARCH_NOT_FOUND_MESSAGE);
+      }
+      setFilteredMovies(filteredFilms);
+      return;
     }
-    setFilteredMovies(filteredFilms);
+    setMessage(SEARCH_REQUEST_ERROR_MESSAGE);
   }, [isShortMovie, requestText, savedMovies]);
-
-  useEffect(() => {
-    if (savedMovies.length === 0) setMessage(NO_SAVED_FOUND);
-    setFilteredMovies(savedMovies);
-  }, []);
 
   return (
     <>

@@ -7,6 +7,7 @@ const AuthInput = ({
   minLength = null,
   maxLength = null,
   autoComplete = `new-${name}`,
+  pattern = null,
   inputValue,
   errorMessage,
   handleChange,
@@ -21,6 +22,7 @@ const AuthInput = ({
       minLength={minLength}
       maxLength={maxLength}
       autoComplete={autoComplete}
+      pattern={pattern}
       required
       value={inputValue ?? ''}
       onChange={handleChange}

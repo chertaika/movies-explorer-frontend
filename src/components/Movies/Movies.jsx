@@ -6,7 +6,11 @@ import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import moviesApi from '../../utils/MoviesApi';
-import { SEARCH_NOT_FOUND, SEARCH_REQUEST_ERROR } from '../../utils/constants';
+import {
+  SEARCH_NOT_FOUND_MESSAGE,
+  SEARCH_REQUEST_ERROR_MESSAGE,
+  SHORT_MOVIES_DURATION,
+} from '../../utils/constants';
 
 const Movies = ({
   isLoggedIn,
@@ -35,7 +39,8 @@ const Movies = ({
     localStorage.setItem('isShortMovie', JSON.stringify(!isShortMovie));
   };
 
-  const filterShortMovies = movie => movie.filter(({ duration }) => duration <= 40);
+  const filterShortMovies = movie => movie
+    .filter(({ duration }) => duration <= SHORT_MOVIES_DURATION);
 
   const filterMovies = (movies, request, isShort) => {
     const searchedMovies = movies
@@ -49,8 +54,8 @@ const Movies = ({
   const handleFilterMovies = (movies, request, isShort) => {
     const filteredFilms = filterMovies(movies, request);
     localStorage.setItem('filteredMovies', JSON.stringify(filteredFilms));
-    if (filteredFilms.length === 0) {
-      setMessage(SEARCH_NOT_FOUND);
+    if (!filteredFilms.length) {
+      setMessage(SEARCH_NOT_FOUND_MESSAGE);
     }
     setFilteredMovies(isShort
       ? filterShortMovies(filteredFilms)
@@ -66,7 +71,7 @@ const Movies = ({
         setAllMovies(initialMovies);
         handleFilterMovies(initialMovies, request, isShort);
       } catch (error) {
-        setMessage(SEARCH_REQUEST_ERROR);
+        setMessage(SEARCH_REQUEST_ERROR_MESSAGE);
         console.log(`Ошибка: ${error}`);
         setIsLoading(false);
       }
@@ -88,7 +93,7 @@ const Movies = ({
           ? filterShortMovies(defaultMovies)
           : defaultMovies);
       } else {
-        setMessage(SEARCH_NOT_FOUND);
+        setMessage(SEARCH_NOT_FOUND_MESSAGE);
       }
     }
     setIsLoading(false);

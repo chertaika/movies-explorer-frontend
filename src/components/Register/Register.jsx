@@ -1,9 +1,16 @@
 import './Register.css';
+import { useEffect } from 'react';
 import Authentication from '../Authentication/Authentication';
 import AuthInput from '../AuthInput/AuthInput';
 import useFormValidator from '../../hooks/useFormValidator';
+import { EMAIL_REGEX, NAME_REGEX } from '../../utils/constants';
 
-const Register = ({ onRegister, requestErrorMessage, buttonState }) => {
+const Register = ({
+  onRegister,
+  requestErrorMessage,
+  buttonState,
+  resetRequestError,
+}) => {
   const {
     inputValues, errorMessages, isValid, handleChange,
   } = useFormValidator();
@@ -12,6 +19,10 @@ const Register = ({ onRegister, requestErrorMessage, buttonState }) => {
     evt.preventDefault();
     onRegister(inputValues);
   };
+
+  useEffect(() => {
+    resetRequestError();
+  }, []);
 
   return (
     <Authentication
@@ -33,6 +44,7 @@ const Register = ({ onRegister, requestErrorMessage, buttonState }) => {
         maxLength="30"
         inputValue={inputValues.name}
         errorMessage={errorMessages.name}
+        pattern={NAME_REGEX}
         handleChange={handleChange}
         required
       />
@@ -42,6 +54,7 @@ const Register = ({ onRegister, requestErrorMessage, buttonState }) => {
         name="email"
         inputValue={inputValues.email}
         errorMessage={errorMessages.email}
+        pattern={EMAIL_REGEX}
         handleChange={handleChange}
         required
       />
