@@ -17,8 +17,7 @@ const MoviesCard = ({
   const [isImageError, setIsImageError] = useState(false);
   const movieImage = isSavedMovies ? image : `https://api.nomoreparties.co/${image.url}`;
 
-  const handleClick = (evt) => {
-    evt.target.classList.toggle('movies-card__save-btn_active');
+  const handleClick = () => {
     onClick(movie);
   };
 

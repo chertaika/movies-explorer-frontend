@@ -7,6 +7,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import moviesApi from '../../utils/MoviesApi';
 import {
+  ERROR,
   SEARCH_NOT_FOUND_MESSAGE,
   SEARCH_REQUEST_ERROR_MESSAGE,
 } from '../../utils/constants';
@@ -20,7 +21,7 @@ const Movies = ({
 }) => {
   const { filterMovies, filterShortMovies } = useMoviesFilter();
   const savedCheckbox = JSON.parse(localStorage.getItem('isShortMovie')) ?? false;
-  const allMovies = JSON.parse(localStorage.getItem('initialMovies')) ?? [];
+  const allMovies = JSON.parse(localStorage.getItem('allMovies')) ?? [];
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -57,11 +58,11 @@ const Movies = ({
     if (!allMovies.length) {
       try {
         const movies = await moviesApi.getInitialMovies();
-        localStorage.setItem('initialMovies', JSON.stringify(movies));
+        localStorage.setItem('allMovies', JSON.stringify(movies));
         handleFilterMovies(movies, request, isShort);
       } catch (error) {
         setMessage(SEARCH_REQUEST_ERROR_MESSAGE);
-        console.log(`Ошибка: ${error}`);
+        console.log(`${ERROR}: ${error}`);
         setIsLoading(false);
       }
     } else {

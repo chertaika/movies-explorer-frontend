@@ -120,7 +120,6 @@ const App = () => {
 
   const handleAuthorization = async (data) => {
     try {
-      setIsLoading(true);
       setButtonLogin({ buttonText: BUTTON_AUTH_BLOCKED_TEXT, block: true });
       await mainApi.authorization(data);
       setAuthErrorMessage('');
@@ -131,16 +130,13 @@ const App = () => {
       } else {
         setAuthErrorMessage(AUTH_ERROR_MESSAGE);
       }
-      console.log(`${ERROR}: ${error}`);
     } finally {
-      setIsLoading(false);
       setButtonLogin({ buttonText: BUTTON_AUTH_TEXT, block: false });
     }
   };
 
   const handleRegistration = async (data) => {
     try {
-      setIsLoading(true);
       setButtonRegister({ buttonText: BUTTON_REG_BLOCKED_TEXT, block: true });
       await mainApi.registration(data);
       setRegErrorMessage('');
@@ -155,7 +151,6 @@ const App = () => {
       }
       console.log(`${ERROR}: ${error}`);
     } finally {
-      setIsLoading(false);
       setButtonRegister({ buttonText: BUTTON_REG_TEXT, block: false });
     }
   };
@@ -175,29 +170,42 @@ const App = () => {
   };
 
   useEffect(() => {
+    if (isLoggedIn) {
+      (async () => {
+        try {
+          setIsLoading(true);
+          const savedUserMovies = await mainApi.getSavedMovies();
+          setSavedMovies(savedUserMovies);
+          setIsLoggedIn(true);
+        } catch (error) {
+          if (error === ERROR_CODE_401) {
+            console.log(`${ERROR}: ${error} ${UNAUTHORIZED_ERROR_MESSAGE}`);
+            return;
+          }
+          console.log(`${ERROR}: ${error}`);
+        } finally {
+          setIsLoading(false);
+        }
+      })();
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
     (async () => {
       try {
-        setIsLoading(true);
         const currentPath = pathname;
-        const [user, savedUserMovies] = await Promise.all([
-          mainApi.getUserInfo(),
-          mainApi.getSavedMovies(),
-        ]);
+        setIsLoading(true);
+        const user = await mainApi.getUserInfo();
         setCurrentUser(user);
-        setSavedMovies(savedUserMovies);
         setIsLoggedIn(true);
         navigate(currentPath, { replace: true });
       } catch (error) {
-        if (error === ERROR_CODE_401) {
-          console.log(`${ERROR}: ${error} ${UNAUTHORIZED_ERROR_MESSAGE}`);
-          return;
-        }
         console.log(`${ERROR}: ${error}`);
       } finally {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
