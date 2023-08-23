@@ -5,13 +5,14 @@ import headerLogo from '../../assets/images/logo.svg';
 const Authentication = ({
   title,
   formName,
-  buttonText,
   children,
-  requestErrorText,
+  requestErrorMessage,
   isValid,
   paragraphText,
   paragraphLink,
   paragraphButton,
+  onSubmit,
+  buttonState: { buttonText, block },
 }) => (
   <main className="authentication">
     <div className="authentication__container">
@@ -19,12 +20,12 @@ const Authentication = ({
         <img className="authentication__logo" src={headerLogo} alt="логотип" />
       </Link>
       <h1 className="authentication__title">{title}</h1>
-      <form className="authentication__form" name={formName}>
+      <form className="authentication__form" name={formName} onSubmit={onSubmit}>
         {children}
-        <p className="authentication__request-error">{requestErrorText}</p>
+        <p className="authentication__request-error">{requestErrorMessage}</p>
         <button
           className="authentication__submit-btn button-hover"
-          disabled={!isValid}
+          disabled={!isValid || block}
           type="submit"
         >
           {buttonText}

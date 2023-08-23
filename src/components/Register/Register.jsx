@@ -1,56 +1,70 @@
 import './Register.css';
+import { useEffect } from 'react';
 import Authentication from '../Authentication/Authentication';
 import AuthInput from '../AuthInput/AuthInput';
 import useFormValidator from '../../hooks/useFormValidator';
+import { EMAIL_REGEX, NAME_REGEX } from '../../utils/constants';
 
-const Register = ({ requestErrorText }) => {
+const Register = ({
+  onRegister,
+  requestErrorMessage,
+  buttonState,
+  resetRequestError,
+}) => {
   const {
     inputValues, errorMessages, isValid, handleChange,
   } = useFormValidator();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onRegister(inputValues);
+  };
+
+  useEffect(() => {
+    resetRequestError();
+  }, []);
 
   return (
     <Authentication
       title="Добро пожаловать!"
       formName="sign-up"
-      buttonText="Зарегистрироваться"
       isValid={isValid}
-      requestErrorText={requestErrorText}
+      requestErrorMessage={requestErrorMessage}
       paragraphText="Уже зарегистрированы?"
       paragraphLink="/signin"
       paragraphButton="Войти"
+      onSubmit={handleSubmit}
+      buttonState={buttonState}
     >
       <AuthInput
         type="text"
         placeholder="Имя"
-        label
         name="name"
         minLength="2"
         maxLength="30"
         inputValue={inputValues.name}
         errorMessage={errorMessages.name}
-        placeInput="auth"
+        pattern={NAME_REGEX}
         handleChange={handleChange}
         required
       />
       <AuthInput
         type="email"
         placeholder="E-mail"
-        label
         name="email"
         inputValue={inputValues.email}
         errorMessage={errorMessages.email}
-        placeInput="auth"
+        pattern={EMAIL_REGEX}
         handleChange={handleChange}
         required
       />
       <AuthInput
         type="password"
         placeholder="Пароль"
-        label
         name="password"
         inputValue={inputValues.password}
         errorMessage={errorMessages.password}
-        placeInput="auth"
+        minLength="8"
         handleChange={handleChange}
         required
       />

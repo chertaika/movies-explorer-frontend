@@ -28,6 +28,7 @@ const useFormValidator = (initialValues = {}) => {
     handleChange,
     resetForm,
     setInputValues,
+    setIsValid,
   };
 };
 

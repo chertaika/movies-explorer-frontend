@@ -1,6 +1,10 @@
 # Movies Explorer (фронтенд)
 
-#### [Ссылка не репозиторий](https://github.com/chertaika/react-mesto-api-full-gha)
+#### [Ссылка не репозиторий](https://github.com/chertaika/movies-explorer-frontend)
+
+#### [Ссылка не pull-request](https://github.com/chertaika/movies-explorer-frontend/pull/2)
+
+#### [Ссылка не деплой](https://chertaika.nomoreparties.co/)
 
 #### Макет dark-3
 
@@ -19,7 +23,6 @@
 
 `npm start` — запускает сборку
 
-
 ## В проекте использованы
 * CRA
 * ESLint
@@ -32,3 +35,10 @@
 * Адаптивная верстка с использованием grid и flex
 * React
 * SPA
+
+## Функционал
+* Регистрация и авторизация пользователей
+* Редактированием личных данных пользователя
+* Поиск фильмов с фильтрацией по продолжительности
+* Добавление фильмов в избранное
+* Удаление фильмов из избранного
